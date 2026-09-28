@@ -25,7 +25,7 @@ jobs:
         env: { PI_MCP_TOKEN: ci-token }
       - run: uv run python scripts/smoke.py http://localhost:8000 http://localhost:8001/mcp
         env: { PI_MCP_TOKEN: ci-token }
-      - uses: aquasecurity/trivy-action@0.28.0
+      - uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25  # v0.36.0
         with: { image-ref: "pi:local", severity: "CRITICAL,HIGH", exit-code: "1", ignore-unfixed: true }
       - if: failure()
         run: docker compose --env-file .env -f docker/compose.yaml logs --no-color > compose.log
