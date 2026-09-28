@@ -1,0 +1,1678 @@
+{
+  "get_active_exposures": {
+    "input": {
+      "properties": {
+        "benchmark_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Benchmark Id"
+        },
+        "dimension": {
+          "default": "sector",
+          "enum": [
+            "sector",
+            "industry",
+            "industry_group",
+            "country",
+            "region",
+            "currency"
+          ],
+          "title": "Dimension",
+          "type": "string"
+        },
+        "filters": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Filters"
+        },
+        "portfolio_id": {
+          "title": "Portfolio Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "portfolio_id"
+      ],
+      "title": "get_active_exposuresArguments",
+      "type": "object"
+    },
+    "output": {
+      "$defs": {
+        "ConstituentRow": {
+          "properties": {
+            "active_weight_pct": {
+              "title": "Active Weight Pct",
+              "type": "number"
+            },
+            "benchmark_weight_pct": {
+              "title": "Benchmark Weight Pct",
+              "type": "number"
+            },
+            "group": {
+              "title": "Group",
+              "type": "string"
+            },
+            "name": {
+              "title": "Name",
+              "type": "string"
+            },
+            "portfolio_weight_pct": {
+              "title": "Portfolio Weight Pct",
+              "type": "number"
+            },
+            "security_id": {
+              "title": "Security Id",
+              "type": "string"
+            },
+            "unit": {
+              "default": "percentage points of NAV",
+              "title": "Unit",
+              "type": "string"
+            }
+          },
+          "required": [
+            "security_id",
+            "name",
+            "group",
+            "portfolio_weight_pct",
+            "benchmark_weight_pct",
+            "active_weight_pct"
+          ],
+          "title": "ConstituentRow",
+          "type": "object"
+        },
+        "ExposureRow": {
+          "properties": {
+            "active_weight_pct": {
+              "title": "Active Weight Pct",
+              "type": "number"
+            },
+            "benchmark_weight_pct": {
+              "title": "Benchmark Weight Pct",
+              "type": "number"
+            },
+            "group": {
+              "title": "Group",
+              "type": "string"
+            },
+            "portfolio_weight_pct": {
+              "title": "Portfolio Weight Pct",
+              "type": "number"
+            },
+            "unit": {
+              "default": "percentage points of NAV",
+              "title": "Unit",
+              "type": "string"
+            }
+          },
+          "required": [
+            "group",
+            "portfolio_weight_pct",
+            "benchmark_weight_pct",
+            "active_weight_pct"
+          ],
+          "title": "ExposureRow",
+          "type": "object"
+        },
+        "Provenance": {
+          "properties": {
+            "as_of": {
+              "title": "As Of",
+              "type": "string"
+            },
+            "calc_id": {
+              "title": "Calc Id",
+              "type": "string"
+            },
+            "covariance_method": {
+              "default": "ledoit_wolf_daily_504d",
+              "title": "Covariance Method",
+              "type": "string"
+            },
+            "data_snapshot_id": {
+              "title": "Data Snapshot Id",
+              "type": "string"
+            },
+            "methodology_version": {
+              "title": "Methodology Version",
+              "type": "string"
+            },
+            "shrinkage": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Shrinkage"
+            },
+            "warnings": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Warnings",
+              "type": "array"
+            }
+          },
+          "required": [
+            "as_of",
+            "data_snapshot_id",
+            "methodology_version",
+            "calc_id"
+          ],
+          "title": "Provenance",
+          "type": "object"
+        }
+      },
+      "properties": {
+        "benchmark_id": {
+          "title": "Benchmark Id",
+          "type": "string"
+        },
+        "dimension": {
+          "title": "Dimension",
+          "type": "string"
+        },
+        "filters": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Filters",
+          "type": "object"
+        },
+        "portfolio_id": {
+          "title": "Portfolio Id",
+          "type": "string"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "rows": {
+          "items": {
+            "$ref": "#/$defs/ExposureRow"
+          },
+          "title": "Rows",
+          "type": "array"
+        },
+        "top_overweights": {
+          "items": {
+            "$ref": "#/$defs/ConstituentRow"
+          },
+          "title": "Top Overweights",
+          "type": "array"
+        },
+        "top_underweights": {
+          "items": {
+            "$ref": "#/$defs/ConstituentRow"
+          },
+          "title": "Top Underweights",
+          "type": "array"
+        }
+      },
+      "required": [
+        "portfolio_id",
+        "benchmark_id",
+        "dimension",
+        "filters",
+        "rows",
+        "top_overweights",
+        "top_underweights",
+        "provenance"
+      ],
+      "title": "ExposureResult",
+      "type": "object"
+    }
+  },
+  "get_duration_profile": {
+    "input": {
+      "properties": {
+        "benchmark_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Benchmark Id"
+        },
+        "nav": {
+          "default": 100000000.0,
+          "title": "Nav",
+          "type": "number"
+        },
+        "portfolio_id": {
+          "title": "Portfolio Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "portfolio_id"
+      ],
+      "title": "get_duration_profileArguments",
+      "type": "object"
+    },
+    "output": {
+      "$defs": {
+        "DurationRow": {
+          "properties": {
+            "benchmark_weight_pct": {
+              "title": "Benchmark Weight Pct",
+              "type": "number"
+            },
+            "contribution_to_active_duration_years": {
+              "title": "Contribution To Active Duration Years",
+              "type": "number"
+            },
+            "group": {
+              "title": "Group",
+              "type": "string"
+            },
+            "portfolio_weight_pct": {
+              "title": "Portfolio Weight Pct",
+              "type": "number"
+            }
+          },
+          "required": [
+            "group",
+            "portfolio_weight_pct",
+            "benchmark_weight_pct",
+            "contribution_to_active_duration_years"
+          ],
+          "title": "DurationRow",
+          "type": "object"
+        },
+        "Provenance": {
+          "properties": {
+            "as_of": {
+              "title": "As Of",
+              "type": "string"
+            },
+            "calc_id": {
+              "title": "Calc Id",
+              "type": "string"
+            },
+            "covariance_method": {
+              "default": "ledoit_wolf_daily_504d",
+              "title": "Covariance Method",
+              "type": "string"
+            },
+            "data_snapshot_id": {
+              "title": "Data Snapshot Id",
+              "type": "string"
+            },
+            "methodology_version": {
+              "title": "Methodology Version",
+              "type": "string"
+            },
+            "shrinkage": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Shrinkage"
+            },
+            "warnings": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Warnings",
+              "type": "array"
+            }
+          },
+          "required": [
+            "as_of",
+            "data_snapshot_id",
+            "methodology_version",
+            "calc_id"
+          ],
+          "title": "Provenance",
+          "type": "object"
+        }
+      },
+      "properties": {
+        "active_duration_years": {
+          "title": "Active Duration Years",
+          "type": "number"
+        },
+        "benchmark_duration_years": {
+          "title": "Benchmark Duration Years",
+          "type": "number"
+        },
+        "benchmark_dv01": {
+          "title": "Benchmark Dv01",
+          "type": "number"
+        },
+        "benchmark_id": {
+          "title": "Benchmark Id",
+          "type": "string"
+        },
+        "by_sector": {
+          "items": {
+            "$ref": "#/$defs/DurationRow"
+          },
+          "title": "By Sector",
+          "type": "array"
+        },
+        "duration_years": {
+          "title": "Duration Years",
+          "type": "number"
+        },
+        "dv01": {
+          "description": "currency per 1bp parallel move, for `nav`",
+          "title": "Dv01",
+          "type": "number"
+        },
+        "nav": {
+          "title": "Nav",
+          "type": "number"
+        },
+        "nav_note": {
+          "default": "notional NAV used for DV01; not the real fund size",
+          "title": "Nav Note",
+          "type": "string"
+        },
+        "portfolio_id": {
+          "title": "Portfolio Id",
+          "type": "string"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "unit": {
+          "default": "duration in years; DV01 in USD per basis point",
+          "title": "Unit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "portfolio_id",
+        "benchmark_id",
+        "duration_years",
+        "benchmark_duration_years",
+        "active_duration_years",
+        "nav",
+        "dv01",
+        "benchmark_dv01",
+        "by_sector",
+        "provenance"
+      ],
+      "title": "DurationProfile",
+      "type": "object"
+    }
+  },
+  "get_holdings": {
+    "input": {
+      "properties": {
+        "group_by": {
+          "anyOf": [
+            {
+              "enum": [
+                "sector",
+                "industry",
+                "industry_group",
+                "country",
+                "region",
+                "currency"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Group By"
+        },
+        "portfolio_id": {
+          "title": "Portfolio Id",
+          "type": "string"
+        },
+        "top_n": {
+          "default": 10,
+          "title": "Top N",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "portfolio_id"
+      ],
+      "title": "get_holdingsArguments",
+      "type": "object"
+    },
+    "output": {
+      "$defs": {
+        "GroupRow": {
+          "properties": {
+            "group": {
+              "title": "Group",
+              "type": "string"
+            },
+            "n_holdings": {
+              "title": "N Holdings",
+              "type": "integer"
+            },
+            "unit": {
+              "default": "percentage points of NAV",
+              "title": "Unit",
+              "type": "string"
+            },
+            "weight_pct": {
+              "title": "Weight Pct",
+              "type": "number"
+            }
+          },
+          "required": [
+            "group",
+            "weight_pct",
+            "n_holdings"
+          ],
+          "title": "GroupRow",
+          "type": "object"
+        },
+        "HoldingRow": {
+          "properties": {
+            "country": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Country"
+            },
+            "duration_years": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Duration Years"
+            },
+            "industry": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Industry"
+            },
+            "maturity": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Maturity"
+            },
+            "name": {
+              "title": "Name",
+              "type": "string"
+            },
+            "sector": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Sector"
+            },
+            "security_id": {
+              "title": "Security Id",
+              "type": "string"
+            },
+            "unit": {
+              "default": "percentage points of NAV",
+              "title": "Unit",
+              "type": "string"
+            },
+            "weight_pct": {
+              "title": "Weight Pct",
+              "type": "number"
+            }
+          },
+          "required": [
+            "security_id",
+            "name",
+            "weight_pct"
+          ],
+          "title": "HoldingRow",
+          "type": "object"
+        },
+        "Provenance": {
+          "properties": {
+            "as_of": {
+              "title": "As Of",
+              "type": "string"
+            },
+            "calc_id": {
+              "title": "Calc Id",
+              "type": "string"
+            },
+            "covariance_method": {
+              "default": "ledoit_wolf_daily_504d",
+              "title": "Covariance Method",
+              "type": "string"
+            },
+            "data_snapshot_id": {
+              "title": "Data Snapshot Id",
+              "type": "string"
+            },
+            "methodology_version": {
+              "title": "Methodology Version",
+              "type": "string"
+            },
+            "shrinkage": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Shrinkage"
+            },
+            "warnings": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Warnings",
+              "type": "array"
+            }
+          },
+          "required": [
+            "as_of",
+            "data_snapshot_id",
+            "methodology_version",
+            "calc_id"
+          ],
+          "title": "Provenance",
+          "type": "object"
+        }
+      },
+      "properties": {
+        "group_by": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Group By"
+        },
+        "groups": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/GroupRow"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Groups"
+        },
+        "n_holdings": {
+          "title": "N Holdings",
+          "type": "integer"
+        },
+        "portfolio_id": {
+          "title": "Portfolio Id",
+          "type": "string"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "top_holdings": {
+          "items": {
+            "$ref": "#/$defs/HoldingRow"
+          },
+          "title": "Top Holdings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "portfolio_id",
+        "n_holdings",
+        "top_holdings",
+        "provenance"
+      ],
+      "title": "HoldingsResult",
+      "type": "object"
+    }
+  },
+  "get_methodology": {
+    "input": {
+      "properties": {},
+      "title": "get_methodologyArguments",
+      "type": "object"
+    },
+    "output": {
+      "$defs": {
+        "Provenance": {
+          "properties": {
+            "as_of": {
+              "title": "As Of",
+              "type": "string"
+            },
+            "calc_id": {
+              "title": "Calc Id",
+              "type": "string"
+            },
+            "covariance_method": {
+              "default": "ledoit_wolf_daily_504d",
+              "title": "Covariance Method",
+              "type": "string"
+            },
+            "data_snapshot_id": {
+              "title": "Data Snapshot Id",
+              "type": "string"
+            },
+            "methodology_version": {
+              "title": "Methodology Version",
+              "type": "string"
+            },
+            "shrinkage": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Shrinkage"
+            },
+            "warnings": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Warnings",
+              "type": "array"
+            }
+          },
+          "required": [
+            "as_of",
+            "data_snapshot_id",
+            "methodology_version",
+            "calc_id"
+          ],
+          "title": "Provenance",
+          "type": "object"
+        }
+      },
+      "properties": {
+        "markdown": {
+          "title": "Markdown",
+          "type": "string"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      },
+      "required": [
+        "markdown",
+        "provenance"
+      ],
+      "title": "MethodologyResult",
+      "type": "object"
+    }
+  },
+  "get_risk_contributions": {
+    "input": {
+      "properties": {
+        "benchmark_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Benchmark Id"
+        },
+        "level": {
+          "default": "security",
+          "enum": [
+            "security",
+            "industry",
+            "sector",
+            "country"
+          ],
+          "title": "Level",
+          "type": "string"
+        },
+        "portfolio_id": {
+          "title": "Portfolio Id",
+          "type": "string"
+        },
+        "top_n": {
+          "default": 10,
+          "title": "Top N",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "portfolio_id"
+      ],
+      "title": "get_risk_contributionsArguments",
+      "type": "object"
+    },
+    "output": {
+      "$defs": {
+        "ContributionRow": {
+          "properties": {
+            "active_weight_pct": {
+              "title": "Active Weight Pct",
+              "type": "number"
+            },
+            "contribution_pct": {
+              "description": "percentage points of annualised TE",
+              "title": "Contribution Pct",
+              "type": "number"
+            },
+            "group": {
+              "title": "Group",
+              "type": "string"
+            },
+            "name": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Name"
+            },
+            "pct_of_te": {
+              "description": "share of TE, sums to 100 across all rows",
+              "title": "Pct Of Te",
+              "type": "number"
+            },
+            "unit": {
+              "default": "percentage points of annualised TE",
+              "title": "Unit",
+              "type": "string"
+            }
+          },
+          "required": [
+            "group",
+            "active_weight_pct",
+            "contribution_pct",
+            "pct_of_te"
+          ],
+          "title": "ContributionRow",
+          "type": "object"
+        },
+        "Provenance": {
+          "properties": {
+            "as_of": {
+              "title": "As Of",
+              "type": "string"
+            },
+            "calc_id": {
+              "title": "Calc Id",
+              "type": "string"
+            },
+            "covariance_method": {
+              "default": "ledoit_wolf_daily_504d",
+              "title": "Covariance Method",
+              "type": "string"
+            },
+            "data_snapshot_id": {
+              "title": "Data Snapshot Id",
+              "type": "string"
+            },
+            "methodology_version": {
+              "title": "Methodology Version",
+              "type": "string"
+            },
+            "shrinkage": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Shrinkage"
+            },
+            "warnings": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Warnings",
+              "type": "array"
+            }
+          },
+          "required": [
+            "as_of",
+            "data_snapshot_id",
+            "methodology_version",
+            "calc_id"
+          ],
+          "title": "Provenance",
+          "type": "object"
+        }
+      },
+      "properties": {
+        "benchmark_id": {
+          "title": "Benchmark Id",
+          "type": "string"
+        },
+        "level": {
+          "title": "Level",
+          "type": "string"
+        },
+        "n_total": {
+          "title": "N Total",
+          "type": "integer"
+        },
+        "portfolio_id": {
+          "title": "Portfolio Id",
+          "type": "string"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "rows": {
+          "items": {
+            "$ref": "#/$defs/ContributionRow"
+          },
+          "title": "Rows",
+          "type": "array"
+        },
+        "tracking_error_pct": {
+          "title": "Tracking Error Pct",
+          "type": "number"
+        }
+      },
+      "required": [
+        "portfolio_id",
+        "benchmark_id",
+        "level",
+        "tracking_error_pct",
+        "rows",
+        "n_total",
+        "provenance"
+      ],
+      "title": "RiskContributions",
+      "type": "object"
+    }
+  },
+  "get_risk_summary": {
+    "input": {
+      "properties": {
+        "benchmark_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Benchmark Id"
+        },
+        "portfolio_id": {
+          "title": "Portfolio Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "portfolio_id"
+      ],
+      "title": "get_risk_summaryArguments",
+      "type": "object"
+    },
+    "output": {
+      "$defs": {
+        "Provenance": {
+          "properties": {
+            "as_of": {
+              "title": "As Of",
+              "type": "string"
+            },
+            "calc_id": {
+              "title": "Calc Id",
+              "type": "string"
+            },
+            "covariance_method": {
+              "default": "ledoit_wolf_daily_504d",
+              "title": "Covariance Method",
+              "type": "string"
+            },
+            "data_snapshot_id": {
+              "title": "Data Snapshot Id",
+              "type": "string"
+            },
+            "methodology_version": {
+              "title": "Methodology Version",
+              "type": "string"
+            },
+            "shrinkage": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Shrinkage"
+            },
+            "warnings": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Warnings",
+              "type": "array"
+            }
+          },
+          "required": [
+            "as_of",
+            "data_snapshot_id",
+            "methodology_version",
+            "calc_id"
+          ],
+          "title": "Provenance",
+          "type": "object"
+        }
+      },
+      "properties": {
+        "benchmark_id": {
+          "title": "Benchmark Id",
+          "type": "string"
+        },
+        "benchmark_vol_pct": {
+          "title": "Benchmark Vol Pct",
+          "type": "number"
+        },
+        "beta": {
+          "title": "Beta",
+          "type": "number"
+        },
+        "n_securities_in_model": {
+          "title": "N Securities In Model",
+          "type": "integer"
+        },
+        "portfolio_id": {
+          "title": "Portfolio Id",
+          "type": "string"
+        },
+        "portfolio_vol_pct": {
+          "title": "Portfolio Vol Pct",
+          "type": "number"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "realised_tracking_error_pct": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Realised Tracking Error Pct"
+        },
+        "risk_coverage_pct": {
+          "description": "share of sum|active weight| in the risk model",
+          "title": "Risk Coverage Pct",
+          "type": "number"
+        },
+        "tracking_error_pct": {
+          "description": "ex-ante, annualised, % ",
+          "title": "Tracking Error Pct",
+          "type": "number"
+        },
+        "unit": {
+          "default": "annualised %; beta is unitless",
+          "title": "Unit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "portfolio_id",
+        "benchmark_id",
+        "tracking_error_pct",
+        "portfolio_vol_pct",
+        "benchmark_vol_pct",
+        "beta",
+        "risk_coverage_pct",
+        "n_securities_in_model",
+        "provenance"
+      ],
+      "title": "RiskSummary",
+      "type": "object"
+    }
+  },
+  "list_portfolios": {
+    "input": {
+      "properties": {},
+      "title": "list_portfoliosArguments",
+      "type": "object"
+    },
+    "output": {
+      "$defs": {
+        "PortfolioInfo": {
+          "properties": {
+            "benchmark_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Benchmark Id"
+            },
+            "holdings_as_of": {
+              "title": "Holdings As Of",
+              "type": "string"
+            },
+            "kind": {
+              "title": "Kind",
+              "type": "string"
+            },
+            "n_holdings": {
+              "title": "N Holdings",
+              "type": "integer"
+            },
+            "name": {
+              "title": "Name",
+              "type": "string"
+            },
+            "portfolio_id": {
+              "title": "Portfolio Id",
+              "type": "string"
+            }
+          },
+          "required": [
+            "portfolio_id",
+            "name",
+            "kind",
+            "benchmark_id",
+            "n_holdings",
+            "holdings_as_of"
+          ],
+          "title": "PortfolioInfo",
+          "type": "object"
+        },
+        "Provenance": {
+          "properties": {
+            "as_of": {
+              "title": "As Of",
+              "type": "string"
+            },
+            "calc_id": {
+              "title": "Calc Id",
+              "type": "string"
+            },
+            "covariance_method": {
+              "default": "ledoit_wolf_daily_504d",
+              "title": "Covariance Method",
+              "type": "string"
+            },
+            "data_snapshot_id": {
+              "title": "Data Snapshot Id",
+              "type": "string"
+            },
+            "methodology_version": {
+              "title": "Methodology Version",
+              "type": "string"
+            },
+            "shrinkage": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Shrinkage"
+            },
+            "warnings": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Warnings",
+              "type": "array"
+            }
+          },
+          "required": [
+            "as_of",
+            "data_snapshot_id",
+            "methodology_version",
+            "calc_id"
+          ],
+          "title": "Provenance",
+          "type": "object"
+        }
+      },
+      "properties": {
+        "portfolios": {
+          "items": {
+            "$ref": "#/$defs/PortfolioInfo"
+          },
+          "title": "Portfolios",
+          "type": "array"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      },
+      "required": [
+        "portfolios",
+        "provenance"
+      ],
+      "title": "PortfolioList",
+      "type": "object"
+    }
+  },
+  "search_securities": {
+    "input": {
+      "properties": {
+        "portfolio_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Portfolio Id"
+        },
+        "query": {
+          "title": "Query",
+          "type": "string"
+        }
+      },
+      "required": [
+        "query"
+      ],
+      "title": "search_securitiesArguments",
+      "type": "object"
+    },
+    "output": {
+      "$defs": {
+        "Provenance": {
+          "properties": {
+            "as_of": {
+              "title": "As Of",
+              "type": "string"
+            },
+            "calc_id": {
+              "title": "Calc Id",
+              "type": "string"
+            },
+            "covariance_method": {
+              "default": "ledoit_wolf_daily_504d",
+              "title": "Covariance Method",
+              "type": "string"
+            },
+            "data_snapshot_id": {
+              "title": "Data Snapshot Id",
+              "type": "string"
+            },
+            "methodology_version": {
+              "title": "Methodology Version",
+              "type": "string"
+            },
+            "shrinkage": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Shrinkage"
+            },
+            "warnings": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Warnings",
+              "type": "array"
+            }
+          },
+          "required": [
+            "as_of",
+            "data_snapshot_id",
+            "methodology_version",
+            "calc_id"
+          ],
+          "title": "Provenance",
+          "type": "object"
+        },
+        "SecurityMatch": {
+          "properties": {
+            "asset_class": {
+              "title": "Asset Class",
+              "type": "string"
+            },
+            "country": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Country"
+            },
+            "industry": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Industry"
+            },
+            "name": {
+              "title": "Name",
+              "type": "string"
+            },
+            "portfolio_weight_pct": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Portfolio Weight Pct"
+            },
+            "security_id": {
+              "title": "Security Id",
+              "type": "string"
+            },
+            "unit": {
+              "default": "percentage points of NAV",
+              "title": "Unit",
+              "type": "string"
+            }
+          },
+          "required": [
+            "security_id",
+            "name",
+            "asset_class",
+            "country",
+            "industry"
+          ],
+          "title": "SecurityMatch",
+          "type": "object"
+        }
+      },
+      "properties": {
+        "matches": {
+          "items": {
+            "$ref": "#/$defs/SecurityMatch"
+          },
+          "title": "Matches",
+          "type": "array"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "query": {
+          "title": "Query",
+          "type": "string"
+        }
+      },
+      "required": [
+        "query",
+        "matches",
+        "provenance"
+      ],
+      "title": "SecuritySearchResult",
+      "type": "object"
+    }
+  },
+  "simulate_trades": {
+    "input": {
+      "$defs": {
+        "Trade": {
+          "properties": {
+            "delta_weight_bps": {
+              "description": "Change in portfolio weight in basis points of NAV. -50 = trim 0.50% of NAV.",
+              "maximum": 500,
+              "minimum": -500,
+              "title": "Delta Weight Bps",
+              "type": "number"
+            },
+            "security_id": {
+              "title": "Security Id",
+              "type": "string"
+            }
+          },
+          "required": [
+            "security_id",
+            "delta_weight_bps"
+          ],
+          "title": "Trade",
+          "type": "object"
+        }
+      },
+      "properties": {
+        "benchmark_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Benchmark Id"
+        },
+        "funding": {
+          "default": "cash",
+          "enum": [
+            "cash",
+            "pro_rata"
+          ],
+          "title": "Funding",
+          "type": "string"
+        },
+        "portfolio_id": {
+          "title": "Portfolio Id",
+          "type": "string"
+        },
+        "trades": {
+          "items": {
+            "$ref": "#/$defs/Trade"
+          },
+          "title": "Trades",
+          "type": "array"
+        }
+      },
+      "required": [
+        "portfolio_id",
+        "trades"
+      ],
+      "title": "simulate_tradesArguments",
+      "type": "object"
+    },
+    "output": {
+      "$defs": {
+        "ContributionChange": {
+          "properties": {
+            "contribution_after_pct": {
+              "title": "Contribution After Pct",
+              "type": "number"
+            },
+            "contribution_before_pct": {
+              "title": "Contribution Before Pct",
+              "type": "number"
+            },
+            "delta_pct": {
+              "title": "Delta Pct",
+              "type": "number"
+            },
+            "name": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Name"
+            },
+            "security_id": {
+              "title": "Security Id",
+              "type": "string"
+            },
+            "unit": {
+              "default": "percentage points of annualised TE",
+              "title": "Unit",
+              "type": "string"
+            }
+          },
+          "required": [
+            "security_id",
+            "name",
+            "contribution_before_pct",
+            "contribution_after_pct",
+            "delta_pct"
+          ],
+          "title": "ContributionChange",
+          "type": "object"
+        },
+        "Metric": {
+          "properties": {
+            "after": {
+              "title": "After",
+              "type": "number"
+            },
+            "before": {
+              "title": "Before",
+              "type": "number"
+            },
+            "delta": {
+              "title": "Delta",
+              "type": "number"
+            },
+            "unit": {
+              "title": "Unit",
+              "type": "string"
+            }
+          },
+          "required": [
+            "before",
+            "after",
+            "delta",
+            "unit"
+          ],
+          "title": "Metric",
+          "type": "object"
+        },
+        "Provenance": {
+          "properties": {
+            "as_of": {
+              "title": "As Of",
+              "type": "string"
+            },
+            "calc_id": {
+              "title": "Calc Id",
+              "type": "string"
+            },
+            "covariance_method": {
+              "default": "ledoit_wolf_daily_504d",
+              "title": "Covariance Method",
+              "type": "string"
+            },
+            "data_snapshot_id": {
+              "title": "Data Snapshot Id",
+              "type": "string"
+            },
+            "methodology_version": {
+              "title": "Methodology Version",
+              "type": "string"
+            },
+            "shrinkage": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Shrinkage"
+            },
+            "warnings": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Warnings",
+              "type": "array"
+            }
+          },
+          "required": [
+            "as_of",
+            "data_snapshot_id",
+            "methodology_version",
+            "calc_id"
+          ],
+          "title": "Provenance",
+          "type": "object"
+        }
+      },
+      "properties": {
+        "benchmark_id": {
+          "title": "Benchmark Id",
+          "type": "string"
+        },
+        "funding": {
+          "title": "Funding",
+          "type": "string"
+        },
+        "hypothetical": {
+          "default": true,
+          "title": "Hypothetical",
+          "type": "boolean"
+        },
+        "metrics": {
+          "additionalProperties": {
+            "$ref": "#/$defs/Metric"
+          },
+          "title": "Metrics",
+          "type": "object"
+        },
+        "note": {
+          "default": "Simulation only. No order has been created.",
+          "title": "Note",
+          "type": "string"
+        },
+        "portfolio_id": {
+          "title": "Portfolio Id",
+          "type": "string"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "top_contribution_changes": {
+          "items": {
+            "$ref": "#/$defs/ContributionChange"
+          },
+          "title": "Top Contribution Changes",
+          "type": "array"
+        },
+        "trades": {
+          "items": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "type": "object"
+          },
+          "title": "Trades",
+          "type": "array"
+        }
+      },
+      "required": [
+        "portfolio_id",
+        "benchmark_id",
+        "trades",
+        "funding",
+        "metrics",
+        "top_contribution_changes",
+        "provenance"
+      ],
+      "title": "SimulationResult",
+      "type": "object"
+    }
+  }
+}

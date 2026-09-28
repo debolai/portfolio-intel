@@ -1,0 +1,77 @@
+[project]
+name = "portfolio-intel"
+version = "0.1.0"
+description = "MCP server and PM agent answering portfolio questions with deterministic, audited analytics"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "anthropic>=1.8.0",
+    "boto3>=1.43.103",
+    "duckdb>=1.5.5",
+    "fastapi>=0.141.1",
+    "httpx>=0.28.1",
+    "langfuse>=4.15.6",
+    "mcp[cli]>=1.10",
+    "numpy>=2.5.3",
+    "opentelemetry-exporter-otlp>=1.45.0",
+    "opentelemetry-instrumentation-asgi>=0.66b0",
+    "opentelemetry-instrumentation-fastapi>=0.66b0",
+    "opentelemetry-instrumentation-httpx>=0.66b0",
+    "opentelemetry-sdk>=1.45.0",
+    "pandas>=3.0.6",
+    "pyarrow>=25.0.1",
+    "pydantic>=2.13.5",
+    "pydantic-settings>=2.15.0",
+    "pyyaml>=6.0.3",
+    "scikit-learn>=1.9.1",
+    "structlog>=26.1.0",
+    "uvicorn[standard]>=0.54.0",
+    "yfinance>=1.7.0",
+]
+
+[project.scripts]
+portfolio-intel = "portfolio_intel:main"
+pi-ingest = "portfolio_intel.data.cli:main"
+pi-mcp    = "portfolio_intel.mcp_server.server:main"
+pi-api    = "portfolio_intel.api.app:main"
+pi-replay = "portfolio_intel.mcp_server.replay:main"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = ["*.md"]
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "N", "SIM", "RUF", "PD", "NPY"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["E501"]  # verbatim provider CSV rows in fixtures
+
+[tool.mypy]
+strict = true
+plugins = ["pydantic.mypy"]
+
+[[tool.mypy.overrides]]
+module = ["yfinance.*", "boto3.*", "botocore.*", "sklearn.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+markers = ["integration", "eval"]
+
+[build-system]
+requires = ["uv_build>=0.12.19,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "hypothesis>=6.168.2",
+    "mypy>=2.3.1",
+    "pandas-stubs>=3.0.5.260914",
+    "pre-commit>=4.6.2",
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.16.9",
+    "types-pyyaml>=6.0.12.20260906",
+]

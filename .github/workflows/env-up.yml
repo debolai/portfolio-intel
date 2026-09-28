@@ -1,0 +1,23 @@
+name: env-up
+on:
+  workflow_dispatch:
+    inputs:
+      env: { default: dev, type: choice, options: [dev] }
+      ttl_hours: { default: "48", type: string }
+      refresh_data: { default: false, type: boolean }
+permissions: { contents: read, id-token: write }
+concurrency: { group: "env-${{ inputs.env }}", cancel-in-progress: false }
+jobs:
+  up:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.env }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - uses: astral-sh/setup-uv@v5
+      - uses: aws-actions/configure-aws-credentials@v4
+        with: { role-to-assume: "${{ vars.AWS_DEPLOY_ROLE_ARN }}", aws-region: ca-central-1 }
+      - run: scripts/env_up.sh "${{ inputs.env }}"
+        env:
+          TTL_HOURS: ${{ inputs.ttl_hours }}
+          REFRESH: ${{ inputs.refresh_data && '1' || '0' }}

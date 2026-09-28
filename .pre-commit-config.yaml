@@ -1,0 +1,10 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.16.9      # keep in step with the ruff version in uv.lock
+    hooks: [{id: ruff, args: [--fix]}, {id: ruff-format}]
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: detect-private-key
+      - id: check-added-large-files
+        args: [--maxkb=4096]   # the committed fixture snapshot is ~3 MB

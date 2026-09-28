@@ -1,0 +1,20 @@
+name: evals
+on:
+  schedule: [{ cron: "0 6 * * 1" }]     # weekly, Monday 06:00 UTC
+  workflow_dispatch:
+permissions: { contents: read }
+jobs:
+  golden:
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --locked
+      - run: cp .env.ci .env
+      - run: make eval
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          LANGFUSE_PUBLIC_KEY: ${{ secrets.LANGFUSE_PUBLIC_KEY }}
+          LANGFUSE_SECRET_KEY: ${{ secrets.LANGFUSE_SECRET_KEY }}
+          PI_MCP_TOKEN: ci-token
+          PI_EVAL_RUN_ID: weekly-${{ github.run_id }}

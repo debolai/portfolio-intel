@@ -1,0 +1,10 @@
+seed: 42
+source: EQ_EU_BMK
+cash_weight: 0.02
+industry_tilts:            # multiplicative on benchmark weight
+  Banks: 1.35
+  Insurance: 1.15
+  Pharmaceuticals: 0.80
+  Beverages: 0.60
+drop_smallest_pct: 0.80    # hold the largest ~20% of names (~200), like an active fund
+idiosyncratic_noise: 0.50  # lognormal sigma on each weight; with the above gives ~2.8% TE

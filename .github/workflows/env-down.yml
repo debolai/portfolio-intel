@@ -1,0 +1,19 @@
+name: env-down
+on:
+  workflow_dispatch:
+    inputs:
+      env: { default: dev, type: choice, options: [dev] }
+
+permissions: { contents: read, id-token: write }
+concurrency: { group: "env-${{ inputs.env }}", cancel-in-progress: false }
+jobs:
+  down:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.env }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - uses: astral-sh/setup-uv@v5
+      - uses: aws-actions/configure-aws-credentials@v4
+        with: { role-to-assume: "${{ vars.AWS_DEPLOY_ROLE_ARN }}", aws-region: ca-central-1 }
+      - run: CONFIRM=yes scripts/env_down.sh "${{ inputs.env }}"

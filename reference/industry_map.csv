@@ -1,0 +1,291 @@
+source,source_industry,industry,industry_group
+yahoo,Advertising Agencies,Media,Media & Entertainment
+yahoo,Aerospace & Defense,Aerospace & Defense,Capital Goods
+yahoo,Agricultural Inputs,Chemicals,Materials
+yahoo,Airlines,Airlines,Transportation
+yahoo,Airports & Air Services,Transportation Infrastructure,Transportation
+yahoo,Aluminum,Metals & Mining,Materials
+yahoo,Apparel Manufacturing,"Textiles, Apparel & Luxury Goods",Consumer Durables & Apparel
+yahoo,Apparel Retail,Specialty Retail,Consumer Discretionary Distribution & Retail
+yahoo,Asset Management,Capital Markets,Diversified Financials
+yahoo,Auto & Truck Dealerships,Specialty Retail,Consumer Discretionary Distribution & Retail
+yahoo,Auto Manufacturers,Automobiles,Automobiles & Components
+yahoo,Auto Parts,Automobile Components,Automobiles & Components
+yahoo,Banks - Diversified,Banks,Banks
+yahoo,Banks - Regional,Banks,Banks
+yahoo,Beverages - Brewers,Beverages,"Food, Beverage & Tobacco"
+yahoo,Beverages - Non-Alcoholic,Beverages,"Food, Beverage & Tobacco"
+yahoo,Beverages - Wineries & Distilleries,Beverages,"Food, Beverage & Tobacco"
+yahoo,Biotechnology,Biotechnology,Pharmaceuticals & Biotechnology
+yahoo,Broadcasting,Media,Media & Entertainment
+yahoo,Building Materials,Construction Materials,Materials
+yahoo,Building Products & Equipment,Building Products,Capital Goods
+yahoo,Business Equipment & Supplies,Commercial Services & Supplies,Commercial & Professional Services
+yahoo,Capital Markets,Capital Markets,Diversified Financials
+yahoo,Chemicals,Chemicals,Materials
+yahoo,Coking Coal,Metals & Mining,Materials
+yahoo,Communication Equipment,Communications Equipment,Technology Hardware & Equipment
+yahoo,Computer Hardware,Technology Hardware,Technology Hardware & Equipment
+yahoo,Confectioners,Food Products,"Food, Beverage & Tobacco"
+yahoo,Conglomerates,Industrial Conglomerates,Capital Goods
+yahoo,Consulting Services,Professional Services,Commercial & Professional Services
+yahoo,Consumer Electronics,Household Durables,Consumer Durables & Apparel
+yahoo,Copper,Metals & Mining,Materials
+yahoo,Credit Services,Consumer Finance,Diversified Financials
+yahoo,Department Stores,Broadline Retail,Consumer Discretionary Distribution & Retail
+yahoo,Diagnostics & Research,Life Sciences Tools & Services,Pharmaceuticals & Biotechnology
+yahoo,Discount Stores,Consumer Staples Retail,Consumer Staples Distribution & Retail
+yahoo,Drug Manufacturers - General,Pharmaceuticals,Pharmaceuticals & Biotechnology
+yahoo,Drug Manufacturers - Specialty & Generic,Pharmaceuticals,Pharmaceuticals & Biotechnology
+yahoo,Education & Training Services,Diversified Consumer Services,Consumer Services
+yahoo,Electrical Equipment & Parts,Electrical Equipment,Capital Goods
+yahoo,Electronic Components,Electronic Equipment & Components,Technology Hardware & Equipment
+yahoo,Electronic Gaming & Multimedia,Entertainment,Media & Entertainment
+yahoo,Electronics & Computer Distribution,Electronic Equipment & Components,Technology Hardware & Equipment
+yahoo,Engineering & Construction,Construction & Engineering,Capital Goods
+yahoo,Entertainment,Entertainment,Media & Entertainment
+yahoo,Farm & Heavy Construction Machinery,Machinery,Capital Goods
+yahoo,Farm Products,Food Products,"Food, Beverage & Tobacco"
+yahoo,Financial Conglomerates,Diversified Financial Services,Diversified Financials
+yahoo,Financial Data & Stock Exchanges,Capital Markets,Diversified Financials
+yahoo,Food Distribution,Consumer Staples Retail,Consumer Staples Distribution & Retail
+yahoo,Footwear & Accessories,"Textiles, Apparel & Luxury Goods",Consumer Durables & Apparel
+yahoo,"Furnishings, Fixtures & Appliances",Household Durables,Consumer Durables & Apparel
+yahoo,Gambling,"Hotels, Restaurants & Leisure",Consumer Services
+yahoo,Gold,Metals & Mining,Materials
+yahoo,Grocery Stores,Consumer Staples Retail,Consumer Staples Distribution & Retail
+yahoo,Health Information Services,Health Care Technology,Health Care Equipment & Services
+yahoo,Healthcare Plans,Health Care Providers & Services,Health Care Equipment & Services
+yahoo,Home Improvement Retail,Specialty Retail,Consumer Discretionary Distribution & Retail
+yahoo,Household & Personal Products,Household Products,Household & Personal Products
+yahoo,Industrial Distribution,Trading Companies & Distributors,Capital Goods
+yahoo,Information Technology Services,IT Services,Software & Services
+yahoo,Infrastructure Operations,Construction & Engineering,Capital Goods
+yahoo,Insurance - Diversified,Insurance,Insurance
+yahoo,Insurance - Life,Insurance,Insurance
+yahoo,Insurance - Property & Casualty,Insurance,Insurance
+yahoo,Insurance - Reinsurance,Insurance,Insurance
+yahoo,Insurance - Specialty,Insurance,Insurance
+yahoo,Insurance Brokers,Insurance,Insurance
+yahoo,Integrated Freight & Logistics,Air Freight & Logistics,Transportation
+yahoo,Internet Content & Information,Interactive Media & Services,Media & Entertainment
+yahoo,Internet Retail,Broadline Retail,Consumer Discretionary Distribution & Retail
+yahoo,Leisure,Leisure Products,Consumer Durables & Apparel
+yahoo,Lodging,"Hotels, Restaurants & Leisure",Consumer Services
+yahoo,Lumber & Wood Production,Paper & Forest Products,Materials
+yahoo,Luxury Goods,"Textiles, Apparel & Luxury Goods",Consumer Durables & Apparel
+yahoo,Marine Shipping,Marine Transportation,Transportation
+yahoo,Medical Care Facilities,Health Care Providers & Services,Health Care Equipment & Services
+yahoo,Medical Devices,Health Care Equipment & Supplies,Health Care Equipment & Services
+yahoo,Medical Distribution,Health Care Providers & Services,Health Care Equipment & Services
+yahoo,Medical Instruments & Supplies,Health Care Equipment & Supplies,Health Care Equipment & Services
+yahoo,Metal Fabrication,Machinery,Capital Goods
+yahoo,Mortgage Finance,Mortgage Finance,Diversified Financials
+yahoo,Oil & Gas Drilling,Energy Equipment & Services,Energy
+yahoo,Oil & Gas E&P,"Oil, Gas & Consumable Fuels",Energy
+yahoo,Oil & Gas Equipment & Services,Energy Equipment & Services,Energy
+yahoo,Oil & Gas Integrated,"Oil, Gas & Consumable Fuels",Energy
+yahoo,Oil & Gas Midstream,"Oil, Gas & Consumable Fuels",Energy
+yahoo,Oil & Gas Refining & Marketing,"Oil, Gas & Consumable Fuels",Energy
+yahoo,Other Industrial Metals & Mining,Metals & Mining,Materials
+yahoo,Other Precious Metals & Mining,Metals & Mining,Materials
+yahoo,Packaged Foods,Food Products,"Food, Beverage & Tobacco"
+yahoo,Packaging & Containers,Containers & Packaging,Materials
+yahoo,Paper & Paper Products,Paper & Forest Products,Materials
+yahoo,Personal Services,Diversified Consumer Services,Consumer Services
+yahoo,Pharmaceutical Retailers,Consumer Staples Retail,Consumer Staples Distribution & Retail
+yahoo,Pollution & Treatment Controls,Machinery,Capital Goods
+yahoo,Publishing,Media,Media & Entertainment
+yahoo,REIT - Diversified,Equity REITs,Real Estate
+yahoo,REIT - Healthcare Facilities,Equity REITs,Real Estate
+yahoo,REIT - Hotel & Motel,Equity REITs,Real Estate
+yahoo,REIT - Industrial,Equity REITs,Real Estate
+yahoo,REIT - Office,Equity REITs,Real Estate
+yahoo,REIT - Residential,Equity REITs,Real Estate
+yahoo,REIT - Retail,Equity REITs,Real Estate
+yahoo,REIT - Specialty,Equity REITs,Real Estate
+yahoo,Railroads,Ground Transportation,Transportation
+yahoo,Real Estate - Development,Real Estate Management & Development,Real Estate
+yahoo,Real Estate - Diversified,Real Estate Management & Development,Real Estate
+yahoo,Real Estate Services,Real Estate Management & Development,Real Estate
+yahoo,Recreational Vehicles,Automobiles,Automobiles & Components
+yahoo,Rental & Leasing Services,Trading Companies & Distributors,Capital Goods
+yahoo,Residential Construction,Household Durables,Consumer Durables & Apparel
+yahoo,Resorts & Casinos,"Hotels, Restaurants & Leisure",Consumer Services
+yahoo,Restaurants,"Hotels, Restaurants & Leisure",Consumer Services
+yahoo,Scientific & Technical Instruments,Electronic Equipment & Components,Technology Hardware & Equipment
+yahoo,Security & Protection Services,Commercial Services & Supplies,Commercial & Professional Services
+yahoo,Semiconductor Equipment & Materials,Semiconductors & Semiconductor Equipment,Semiconductors & Semiconductor Equipment
+yahoo,Semiconductors,Semiconductors & Semiconductor Equipment,Semiconductors & Semiconductor Equipment
+yahoo,Shell Companies,Diversified Financial Services,Diversified Financials
+yahoo,Silver,Metals & Mining,Materials
+yahoo,Software - Application,Software,Software & Services
+yahoo,Software - Infrastructure,Software,Software & Services
+yahoo,Solar,Semiconductors & Semiconductor Equipment,Semiconductors & Semiconductor Equipment
+yahoo,Specialty Business Services,Commercial Services & Supplies,Commercial & Professional Services
+yahoo,Specialty Chemicals,Chemicals,Materials
+yahoo,Specialty Industrial Machinery,Machinery,Capital Goods
+yahoo,Specialty Retail,Specialty Retail,Consumer Discretionary Distribution & Retail
+yahoo,Staffing & Employment Services,Professional Services,Commercial & Professional Services
+yahoo,Steel,Metals & Mining,Materials
+yahoo,Telecom Services,Diversified Telecommunication Services,Telecommunication Services
+yahoo,Textile Manufacturing,"Textiles, Apparel & Luxury Goods",Consumer Durables & Apparel
+yahoo,Thermal Coal,"Oil, Gas & Consumable Fuels",Energy
+yahoo,Tobacco,Tobacco,"Food, Beverage & Tobacco"
+yahoo,Tools & Accessories,Machinery,Capital Goods
+yahoo,Travel Services,"Hotels, Restaurants & Leisure",Consumer Services
+yahoo,Trucking,Ground Transportation,Transportation
+yahoo,Uranium,"Oil, Gas & Consumable Fuels",Energy
+yahoo,Utilities - Diversified,Multi-Utilities,Utilities
+yahoo,Utilities - Independent Power Producers,Independent Power & Renewables,Utilities
+yahoo,Utilities - Regulated Electric,Electric Utilities,Utilities
+yahoo,Utilities - Regulated Gas,Gas Utilities,Utilities
+yahoo,Utilities - Regulated Water,Water Utilities,Utilities
+yahoo,Utilities - Renewable,Independent Power & Renewables,Utilities
+yahoo,Waste Management,Commercial Services & Supplies,Commercial & Professional Services
+vanguard,Advertising,Media,Media & Entertainment
+vanguard,Aerospace & Defense,Aerospace & Defense,Capital Goods
+vanguard,Agricultural & Farm Machinery,Machinery,Capital Goods
+vanguard,Agricultural Products & Services,Food Products,"Food, Beverage & Tobacco"
+vanguard,Air Freight & Logistics,Air Freight & Logistics,Transportation
+vanguard,Airport Services,Transportation Infrastructure,Transportation
+vanguard,Aluminum,Metals & Mining,Materials
+vanguard,Apparel Retail,Specialty Retail,Consumer Discretionary Distribution & Retail
+vanguard,"Apparel, Accessories & Luxury Goods","Textiles, Apparel & Luxury Goods",Consumer Durables & Apparel
+vanguard,Application Software,Software,Software & Services
+vanguard,Asset Management & Custody Banks,Capital Markets,Diversified Financials
+vanguard,Automobile Manufacturers,Automobiles,Automobiles & Components
+vanguard,Automotive Parts & Equipment,Automobile Components,Automobiles & Components
+vanguard,Automotive Retail,Specialty Retail,Consumer Discretionary Distribution & Retail
+vanguard,Biotechnology,Biotechnology,Pharmaceuticals & Biotechnology
+vanguard,Brewers,Beverages,"Food, Beverage & Tobacco"
+vanguard,Broadcasting,Media,Media & Entertainment
+vanguard,Broadline Retail,Broadline Retail,Consumer Discretionary Distribution & Retail
+vanguard,Building Products,Building Products,Capital Goods
+vanguard,Cable & Satellite,Media,Media & Entertainment
+vanguard,Cargo Ground Transportation,Ground Transportation,Transportation
+vanguard,Casinos & Gaming,"Hotels, Restaurants & Leisure",Consumer Services
+vanguard,Commercial & Residential Mortgage Finance,Mortgage Finance,Diversified Financials
+vanguard,Commodity Chemicals,Chemicals,Materials
+vanguard,Communications Equipment,Communications Equipment,Technology Hardware & Equipment
+vanguard,Computer & Electronics Retail,Specialty Retail,Consumer Discretionary Distribution & Retail
+vanguard,Construction & Engineering,Construction & Engineering,Capital Goods
+vanguard,Construction Machinery & Heavy Transportation Equipment,Machinery,Capital Goods
+vanguard,Construction Materials,Construction Materials,Materials
+vanguard,Consumer Electronics,Household Durables,Consumer Durables & Apparel
+vanguard,Consumer Finance,Consumer Finance,Diversified Financials
+vanguard,Consumer Staples Merchandise Retail,Consumer Staples Retail,Consumer Staples Distribution & Retail
+vanguard,Copper,Metals & Mining,Materials
+vanguard,Data Processing & Outsourced Services,Commercial Services & Supplies,Commercial & Professional Services
+vanguard,Distillers & Vintners,Beverages,"Food, Beverage & Tobacco"
+vanguard,Distributors,Distributors,Consumer Discretionary Distribution & Retail
+vanguard,Diversified Banks,Banks,Banks
+vanguard,Diversified Capital Markets,Capital Markets,Diversified Financials
+vanguard,Diversified Chemicals,Chemicals,Materials
+vanguard,Diversified Financial Services,Diversified Financial Services,Diversified Financials
+vanguard,Diversified Metals & Mining,Metals & Mining,Materials
+vanguard,Diversified REITs,Equity REITs,Real Estate
+vanguard,Diversified Real Estate Activities,Real Estate Management & Development,Real Estate
+vanguard,Diversified Support Services,Commercial Services & Supplies,Commercial & Professional Services
+vanguard,Drug Retail,Consumer Staples Retail,Consumer Staples Distribution & Retail
+vanguard,Education Services,Diversified Consumer Services,Consumer Services
+vanguard,Electric Utilities,Electric Utilities,Utilities
+vanguard,Electrical Components & Equipment,Electrical Equipment,Capital Goods
+vanguard,Electronic Components,Electronic Equipment & Components,Technology Hardware & Equipment
+vanguard,Electronic Equipment & Instruments,Electronic Equipment & Components,Technology Hardware & Equipment
+vanguard,Electronic Manufacturing Services,Electronic Equipment & Components,Technology Hardware & Equipment
+vanguard,Environmental & Facilities Services,Commercial Services & Supplies,Commercial & Professional Services
+vanguard,Fertilizers & Agricultural Chemicals,Chemicals,Materials
+vanguard,Financial Exchanges & Data,Capital Markets,Diversified Financials
+vanguard,Food Distributors,Consumer Staples Retail,Consumer Staples Distribution & Retail
+vanguard,Food Retail,Consumer Staples Retail,Consumer Staples Distribution & Retail
+vanguard,Footwear,"Textiles, Apparel & Luxury Goods",Consumer Durables & Apparel
+vanguard,Forest Products,Paper & Forest Products,Materials
+vanguard,Gas Utilities,Gas Utilities,Utilities
+vanguard,Gold,Metals & Mining,Materials
+vanguard,Health Care Distributors,Health Care Providers & Services,Health Care Equipment & Services
+vanguard,Health Care Equipment,Health Care Equipment & Supplies,Health Care Equipment & Services
+vanguard,Health Care Facilities,Health Care Providers & Services,Health Care Equipment & Services
+vanguard,Health Care REITs,Equity REITs,Real Estate
+vanguard,Health Care Services,Health Care Providers & Services,Health Care Equipment & Services
+vanguard,Health Care Supplies,Health Care Equipment & Supplies,Health Care Equipment & Services
+vanguard,Health Care Technology,Health Care Technology,Health Care Equipment & Services
+vanguard,Heavy Electrical Equipment,Electrical Equipment,Capital Goods
+vanguard,Highways & Railtracks,Transportation Infrastructure,Transportation
+vanguard,Home Improvement Retail,Specialty Retail,Consumer Discretionary Distribution & Retail
+vanguard,Homebuilding,Household Durables,Consumer Durables & Apparel
+vanguard,Homefurnishing Retail,Specialty Retail,Consumer Discretionary Distribution & Retail
+vanguard,"Hotels, Resorts & Cruise Lines","Hotels, Restaurants & Leisure",Consumer Services
+vanguard,Household Appliances,Household Durables,Consumer Durables & Apparel
+vanguard,Household Products,Household Products,Household & Personal Products
+vanguard,Human Resource & Employment Services,Professional Services,Commercial & Professional Services
+vanguard,IT Consulting & Other Services,IT Services,Software & Services
+vanguard,Independent Power Producers & Energy Traders,Independent Power & Renewables,Utilities
+vanguard,Industrial Conglomerates,Industrial Conglomerates,Capital Goods
+vanguard,Industrial Gases,Chemicals,Materials
+vanguard,Industrial Machinery & Supplies & Components,Machinery,Capital Goods
+vanguard,Industrial REITs,Equity REITs,Real Estate
+vanguard,Integrated Oil & Gas,"Oil, Gas & Consumable Fuels",Energy
+vanguard,Integrated Telecommunication Services,Diversified Telecommunication Services,Telecommunication Services
+vanguard,Interactive Home Entertainment,Entertainment,Media & Entertainment
+vanguard,Interactive Media & Services,Interactive Media & Services,Media & Entertainment
+vanguard,Internet Services & Infrastructure,IT Services,Software & Services
+vanguard,Investment Banking & Brokerage,Capital Markets,Diversified Financials
+vanguard,Leisure Facilities,"Hotels, Restaurants & Leisure",Consumer Services
+vanguard,Leisure Products,Leisure Products,Consumer Durables & Apparel
+vanguard,Life & Health Insurance,Insurance,Insurance
+vanguard,Life Sciences Tools & Services,Life Sciences Tools & Services,Pharmaceuticals & Biotechnology
+vanguard,Marine Transportation,Marine Transportation,Transportation
+vanguard,"Metal, Glass & Plastic Containers",Containers & Packaging,Materials
+vanguard,Motorcycle Manufacturers,Automobiles,Automobiles & Components
+vanguard,Movies & Entertainment,Entertainment,Media & Entertainment
+vanguard,Multi-Family Residential REITs,Equity REITs,Real Estate
+vanguard,Multi-Sector Holdings,Diversified Financial Services,Diversified Financials
+vanguard,Multi-Utilities,Multi-Utilities,Utilities
+vanguard,Multi-line Insurance,Insurance,Insurance
+vanguard,Office REITs,Equity REITs,Real Estate
+vanguard,Office Services & Supplies,Commercial Services & Supplies,Commercial & Professional Services
+vanguard,Oil & Gas Drilling,Energy Equipment & Services,Energy
+vanguard,Oil & Gas Equipment & Services,Energy Equipment & Services,Energy
+vanguard,Oil & Gas Exploration & Production,"Oil, Gas & Consumable Fuels",Energy
+vanguard,Oil & Gas Refining & Marketing,"Oil, Gas & Consumable Fuels",Energy
+vanguard,Oil & Gas Storage & Transportation,"Oil, Gas & Consumable Fuels",Energy
+vanguard,Other Specialty Retail,Specialty Retail,Consumer Discretionary Distribution & Retail
+vanguard,Packaged Foods & Meats,Food Products,"Food, Beverage & Tobacco"
+vanguard,Paper & Plastic Packaging Products & Materials,Containers & Packaging,Materials
+vanguard,Paper Products,Paper & Forest Products,Materials
+vanguard,Passenger Airlines,Airlines,Transportation
+vanguard,Passenger Ground Transportation,Ground Transportation,Transportation
+vanguard,Personal Care Products,Personal Care Products,Household & Personal Products
+vanguard,Pharmaceuticals,Pharmaceuticals,Pharmaceuticals & Biotechnology
+vanguard,Property & Casualty Insurance,Insurance,Insurance
+vanguard,Publishing,Media,Media & Entertainment
+vanguard,Rail Transportation,Ground Transportation,Transportation
+vanguard,Real Estate Development,Real Estate Management & Development,Real Estate
+vanguard,Real Estate Operating Companies,Real Estate Management & Development,Real Estate
+vanguard,Real Estate Services,Real Estate Management & Development,Real Estate
+vanguard,Regional Banks,Banks,Banks
+vanguard,Reinsurance,Insurance,Insurance
+vanguard,Renewable Electricity,Independent Power & Renewables,Utilities
+vanguard,Research & Consulting Services,Professional Services,Commercial & Professional Services
+vanguard,Restaurants,"Hotels, Restaurants & Leisure",Consumer Services
+vanguard,Retail REITs,Equity REITs,Real Estate
+vanguard,Security & Alarm Services,Commercial Services & Supplies,Commercial & Professional Services
+vanguard,Self-Storage REITs,Equity REITs,Real Estate
+vanguard,Semiconductor Materials & Equipment,Semiconductors & Semiconductor Equipment,Semiconductors & Semiconductor Equipment
+vanguard,Semiconductors,Semiconductors & Semiconductor Equipment,Semiconductors & Semiconductor Equipment
+vanguard,Silver,Metals & Mining,Materials
+vanguard,Soft Drinks & Non-alcoholic Beverages,Beverages,"Food, Beverage & Tobacco"
+vanguard,Specialized Finance,Diversified Financial Services,Diversified Financials
+vanguard,Specialty Chemicals,Chemicals,Materials
+vanguard,Steel,Metals & Mining,Materials
+vanguard,Systems Software,Software,Software & Services
+vanguard,Technology Distributors,Electronic Equipment & Components,Technology Hardware & Equipment
+vanguard,"Technology Hardware, Storage & Peripherals",Technology Hardware,Technology Hardware & Equipment
+vanguard,Textiles,"Textiles, Apparel & Luxury Goods",Consumer Durables & Apparel
+vanguard,Tires & Rubber,Automobile Components,Automobiles & Components
+vanguard,Tobacco,Tobacco,"Food, Beverage & Tobacco"
+vanguard,Trading Companies & Distributors,Trading Companies & Distributors,Capital Goods
+vanguard,Transaction & Payment Processing Services,Diversified Financial Services,Diversified Financials
+vanguard,Water Utilities,Water Utilities,Utilities
+vanguard,Wireless Telecommunication Services,Wireless Telecommunication Services,Telecommunication Services

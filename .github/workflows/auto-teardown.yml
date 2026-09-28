@@ -1,0 +1,15 @@
+name: auto-teardown
+on:
+  schedule: [{ cron: "15 * * * *" }]    # hourly
+  workflow_dispatch:
+permissions: { contents: read, id-token: write }
+concurrency: { group: env-dev, cancel-in-progress: false }
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - uses: aws-actions/configure-aws-credentials@v4
+        with: { role-to-assume: "${{ vars.AWS_DEPLOY_ROLE_ARN }}", aws-region: ca-central-1 }
+      - run: scripts/env_expire_check.sh dev

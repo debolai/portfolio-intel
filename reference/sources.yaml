@@ -1,0 +1,12 @@
+ishares:
+  IEUR:
+    portfolio_id: 264617
+    role: equity benchmark
+  AGG:
+    portfolio_id: 239458        # replace: copy AGG's download link the same way and take its portfolioId
+    role: bond benchmark
+
+vanguard:
+  VGK:
+    role: real equity portfolio
+    method: manual

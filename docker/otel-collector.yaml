@@ -1,0 +1,28 @@
+# Local stack with traces also sent to Langfuse Cloud (set OTEL_CONFIG=otel-collector.yaml in .env).
+# Use https://us.cloud.langfuse.com if your Langfuse project is in the US region.
+receivers:
+  otlp:
+    protocols:
+      grpc: { endpoint: 0.0.0.0:4317 }
+      http: { endpoint: 0.0.0.0:4318 }
+processors:
+  batch: {}
+  attributes/redact:
+    actions: [{ key: pi.args, action: hash }]    # hash tool arguments before they leave the machine
+exporters:
+  otlphttp/langfuse:
+    endpoint: https://cloud.langfuse.com/api/public/otel
+    headers: { Authorization: "Basic ${env:LANGFUSE_BASIC_AUTH}" }   # base64(public_key:secret_key)
+  otlp/jaeger:
+    endpoint: jaeger:4317
+    tls: { insecure: true }
+service:
+  pipelines:
+    traces/langfuse:
+      receivers: [otlp]
+      processors: [batch, attributes/redact]
+      exporters: [otlphttp/langfuse]
+    traces/local:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlp/jaeger]

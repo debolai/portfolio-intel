@@ -1,0 +1,81 @@
+name: ci
+on:
+  pull_request:
+  workflow_call:
+permissions: { contents: read }
+jobs:
+  lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --locked
+      - run: make lint test
+
+  compose-integration:
+    needs: lint-test
+    runs-on: ubuntu-24.04-arm        # native ARM64 build; use ubuntu-latest if deploying X86_64
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --locked
+      - run: cp .env.ci .env
+      - run: make local-up
+      - run: uv run pytest -m integration
+        env: { PI_MCP_TOKEN: ci-token }
+      - run: uv run python scripts/smoke.py http://localhost:8000 http://localhost:8001/mcp
+        env: { PI_MCP_TOKEN: ci-token }
+      - uses: aquasecurity/trivy-action@0.28.0
+        with: { image-ref: "pi:local", severity: "CRITICAL,HIGH", exit-code: "1", ignore-unfixed: true }
+      - if: failure()
+        run: docker compose --env-file .env -f docker/compose.yaml logs --no-color > compose.log
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with: { name: compose-logs, path: compose.log }
+
+  terraform-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - run: terraform fmt -check -recursive infra/terraform
+      - run: |
+          for d in bootstrap foundation runtime; do
+            terraform -chdir=infra/terraform/$d init -backend=false -input=false
+            terraform -chdir=infra/terraform/$d validate
+          done
+
+  changes:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions: { contents: read, pull-requests: read }
+    outputs:
+      agent: ${{ steps.f.outputs.agent }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: f
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            agent:
+              - 'src/portfolio_intel/agent/**'
+              - 'src/portfolio_intel/mcp_server/**'
+              - 'tests/evals/**'
+
+  agent-evals:
+    needs: [changes, compose-integration]
+    # Needs the Anthropic key from repository secrets, so never for pull requests from forks.
+    if: needs.changes.outputs.agent == 'true' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --locked
+      - run: cp .env.ci .env
+      - run: make eval
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          LANGFUSE_PUBLIC_KEY: ${{ secrets.LANGFUSE_PUBLIC_KEY }}
+          LANGFUSE_SECRET_KEY: ${{ secrets.LANGFUSE_SECRET_KEY }}
+          PI_MCP_TOKEN: ci-token
+          PI_EVAL_RUN_ID: pr-${{ github.event.pull_request.number }}-${{ github.run_attempt }}

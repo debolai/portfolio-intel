@@ -1,0 +1,12 @@
+seed: 7
+source: FI_US_BMK
+cash_weight: 0.02
+industry_tilts:            # multiplicative on benchmark weight, keyed by bond sector
+  Industrial: 1.30
+  Financial Institutions: 1.30
+  Utility: 1.20
+  Treasury: 0.75
+long_duration_threshold: 10.0   # years
+long_duration_tilt: 1.25        # extra multiplier for bonds above the threshold
+drop_smallest_pct: 0.85    # AGG has ~13,000 lines; hold the largest ~15%
+idiosyncratic_noise: 0.25

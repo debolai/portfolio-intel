@@ -1,0 +1,57 @@
+name: release
+on:
+  push: { branches: [main] }
+permissions: { contents: read, id-token: write }
+concurrency: { group: release-dev, cancel-in-progress: false }
+jobs:
+  ci:
+    uses: ./.github/workflows/ci.yml
+    secrets: inherit
+
+  publish:
+    needs: ci
+    runs-on: ubuntu-24.04-arm
+    outputs: { tag: "${{ steps.meta.outputs.tag }}" }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --locked
+      - id: meta
+        run: echo "tag=${GITHUB_SHA::12}" >> "$GITHUB_OUTPUT"
+      - name: Build once and test the exact image in Compose
+        run: |
+          cp .env.ci .env
+          make local-up
+          PI_MCP_TOKEN=ci-token uv run pytest -m integration
+          PI_MCP_TOKEN=ci-token uv run python scripts/smoke.py http://localhost:8000 http://localhost:8001/mcp
+      - uses: aws-actions/configure-aws-credentials@v4
+        with: { role-to-assume: "${{ vars.AWS_DEPLOY_ROLE_ARN }}", aws-region: ca-central-1 }
+      - id: ecr
+        uses: aws-actions/amazon-ecr-login@v2
+      - name: Push the tested image and mark it green
+        env:
+          REPO: ${{ steps.ecr.outputs.registry }}/portfolio-intel
+          TAG: ${{ steps.meta.outputs.tag }}
+        run: |
+          docker tag pi:local "$REPO:$TAG"
+          docker push "$REPO:$TAG"
+          aws ssm put-parameter --name /pi/dev/last_green_image_tag --value "$TAG" --type String --overwrite
+
+  roll-forward:
+    needs: publish
+    runs-on: ubuntu-latest
+    environment: dev                  # optional: add yourself as a required reviewer
+    concurrency: { group: env-dev, cancel-in-progress: false }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - uses: astral-sh/setup-uv@v5
+      - uses: aws-actions/configure-aws-credentials@v4
+        with: { role-to-assume: "${{ vars.AWS_DEPLOY_ROLE_ARN }}", aws-region: ca-central-1 }
+      - name: Update the running environment, or just record the green image if it is down
+        run: |
+          if [ "$(scripts/env_status.sh dev --quiet)" = "up" ]; then
+            CONFIRM=yes KEEP_EXPIRY=1 scripts/env_up.sh dev
+          else
+            echo "Runtime is down; ${{ needs.publish.outputs.tag }} is recorded as green and will be used by the next make up."
+          fi

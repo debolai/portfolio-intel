@@ -1,0 +1,55 @@
+x-app: &app
+  build: { context: .., dockerfile: docker/Dockerfile }
+  image: pi:local
+  env_file: ../.env
+  read_only: true                       # mirrors ECS readonlyRootFilesystem
+  tmpfs: ["/tmp"]
+  user: "10001"
+  restart: unless-stopped
+
+services:
+  mcp:
+    <<: *app
+    command: ["pi-mcp", "--transport", "http", "--port", "8001"]
+    environment:
+      PI_DUCKDB_PATH: ${PI_DATA_FILE:-/data/portfolio.duckdb}
+      PI_AUDIT_SINK: jsonl
+      PI_AUDIT_PATH: /audit/audit.jsonl
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://otel:4318
+      OTEL_SERVICE_NAME: pi-mcp
+    volumes: ["../data:/data:ro", "../audit:/audit"]
+    ports: ["8001:8001"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8001/healthz')"]
+      interval: 5s
+      retries: 20
+    depends_on: [otel]
+
+  api:
+    <<: *app
+    command: ["pi-api"]
+    environment:
+      PI_DUCKDB_PATH: ${PI_DATA_FILE:-/data/portfolio.duckdb}
+      PI_MCP_URL: http://mcp:8001/mcp
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://otel:4318
+      OTEL_SERVICE_NAME: pi-agent-api
+    volumes: ["../data:/data:ro"]
+    ports: ["8000:8000"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/healthz')"]
+      interval: 5s
+      retries: 20
+    depends_on:
+      mcp: { condition: service_healthy }
+
+  otel:
+    image: otel/opentelemetry-collector-contrib:0.110.0
+    command: ["--config=/etc/otel.yaml"]
+    volumes: ["./${OTEL_CONFIG:-otel-collector.local.yaml}:/etc/otel.yaml:ro"]
+    environment: { LANGFUSE_BASIC_AUTH: "${LANGFUSE_BASIC_AUTH:-}" }
+    ports: ["4318:4318"]                # lets code run with `uv run` on your machine send traces too
+    depends_on: [jaeger]
+
+  jaeger:
+    image: jaegertracing/all-in-one:1.62.0
+    ports: ["16686:16686"]              # Jaeger web UI

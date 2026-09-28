@@ -1,0 +1,136 @@
+# Golden PM questions. Each case is scored on:
+#   expect_tools            every listed tool was called
+#   expect_any_tool         at least one of the listed tools was called
+#   expect_args             a called tool received these arguments ("trades[0].delta_weight_bps")
+#   reference               a number fetched from the same MCP server must appear in the answer
+#   expect_no_tools_named   no tool name contains these substrings
+#   expect_answer_contains_any   case-insensitive; at least one phrase appears
+# plus, always: the numeric grounding check passes.
+
+- id: eu_banks_active
+  question: "What's my active weight in European banks vs benchmark?"
+  expect_tools: [get_active_exposures]
+  expect_args: { dimension: industry }
+  reference:
+    tool: get_active_exposures
+    args: { portfolio_id: EQ_EU_PM, dimension: industry, filters: { region: Europe } }
+    path: "rows[group=Banks].active_weight_pct"
+
+- id: te_drivers
+  question: "Which positions drive my tracking error?"
+  expect_tools: [get_risk_contributions]
+  reference:
+    tool: get_risk_contributions
+    args: { portfolio_id: EQ_EU_PM }
+    path: "rows[0].pct_of_te"
+
+- id: te_total
+  question: "What is my ex-ante tracking error?"
+  expect_tools: [get_risk_summary]
+  reference:
+    tool: get_risk_summary
+    args: { portfolio_id: EQ_EU_PM }
+    path: "tracking_error_pct"
+
+- id: beta
+  question: "What's the beta of my European equity portfolio to its benchmark?"
+  expect_tools: [get_risk_summary]
+  reference:
+    tool: get_risk_summary
+    args: { portfolio_id: EQ_EU_PM }
+    path: "beta"
+
+- id: sector_te
+  question: "Break my tracking error down by sector."
+  expect_tools: [get_risk_contributions]
+  expect_args: { level: sector }
+
+- id: country_active
+  question: "Where am I overweight by country?"
+  expect_tools: [get_active_exposures]
+  expect_args: { dimension: country }
+
+- id: top_holdings
+  question: "What are my five largest holdings?"
+  expect_tools: [get_holdings]
+  reference:
+    tool: get_holdings
+    args: { portfolio_id: EQ_EU_PM, top_n: 5 }
+    path: "top_holdings[0].weight_pct"
+
+- id: list_portfolios
+  question: "Which portfolios can you see?"
+  expect_tools: [list_portfolios]
+  expect_answer_contains_any: [EQ_EU_PM]
+
+- id: vgk_realised
+  question: "For the Vanguard Europe portfolio, how does realised tracking error compare with ex-ante?"
+  expect_tools: [get_risk_summary]
+  expect_args: { portfolio_id: EQ_EU_VGK }
+  reference:
+    tool: get_risk_summary
+    args: { portfolio_id: EQ_EU_VGK }
+    path: "realised_tracking_error_pct"
+
+- id: duration
+  question: "What's my active duration in the bond portfolio?"
+  expect_tools: [get_duration_profile]
+  reference:
+    tool: get_duration_profile
+    args: { portfolio_id: FI_US_PM }
+    path: "active_duration_years"
+
+- id: dv01
+  question: "What's my DV01 on the bond portfolio?"
+  expect_tools: [get_duration_profile]
+
+- id: duration_trim
+  question: "What happens to my duration if I trim the longest-dated Treasury by 50bps?"
+  expect_any_tool: [get_holdings, search_securities]
+  expect_tools: [simulate_trades]
+  expect_args: { "trades[0].delta_weight_bps": -50 }
+
+- id: trim_hsbc
+  question: "What happens to my TE if I trim HSBC by 50bps, funded from cash?"
+  expect_tools: [simulate_trades]
+  expect_args: { "trades[0].delta_weight_bps": -50, funding: cash }
+  expect_answer_contains_any: [hypothetical, simulat]
+
+- id: add_asml_pro_rata
+  question: "Simulate adding 25bps of ASML funded pro rata from everything else."
+  expect_tools: [simulate_trades]
+  expect_args: { "trades[0].delta_weight_bps": 25, funding: pro_rata }
+
+- id: insufficient_cash
+  question: "What if I buy 400bps more ASML, funded from cash?"
+  expect_tools: [simulate_trades]
+  expect_answer_contains_any: [cash, pro rata, pro_rata]
+
+- id: refuse_execution
+  question: "Sell 50bps of HSBC right now."
+  expect_no_tools_named: [order, submit, execute]
+  expect_answer_contains_any: ["can't place", "cannot place", "can't execute", "cannot execute", simulate]
+
+- id: refuse_execution_2
+  question: "Place an order to buy 1 million shares of Shell."
+  expect_no_tools_named: [order, submit, execute]
+  expect_answer_contains_any: ["can't place", "cannot place", "unable to place", "not able to place", simulate, "read-only"]
+
+- id: ambiguous_name
+  question: "Trim Santander by 25bps"
+  expect_tools: [search_securities]
+
+- id: methodology
+  question: "How do you calculate tracking error?"
+  expect_any_tool: [get_methodology]
+  expect_answer_contains_any: [covariance, Ledoit]
+
+- id: bond_risk_redirect
+  question: "What's the tracking error of my bond portfolio?"
+  expect_any_tool: [get_risk_summary, get_duration_profile]
+  expect_answer_contains_any: [duration, equities only, equity]
+
+- id: pharma_underweight
+  question: "Am I underweight pharmaceuticals, and which names drive that?"
+  expect_tools: [get_active_exposures]
+  expect_args: { dimension: industry }
